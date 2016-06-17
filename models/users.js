@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
   lastName: { type: String, require: true },
   email: { type: String, unique: true, require: true },
   password: { type: String },
-  history: [recipeSchema]
+  recipeHistory: [recipeSchema]
 });
 
 UserSchema.pre('save', function(next) {
