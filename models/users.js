@@ -3,7 +3,7 @@ var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var recipeSchema = require('./recipes.js').schema;
 
-var userSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
   firstName: { type: String, require: true },
   lastName: { type: String, require: true },
   email: { type: String, unique: true, require: true },
@@ -22,6 +22,6 @@ UserSchema.methods.authenticate = function(passwordTry) {
   return bcrypt.compareSync(passwordTry, this.password);
 };
 
-var Recipe = mongoose.model('Recipe', recipeSchema);
+var User = mongoose.model('User', UserSchema);
 
 module.exports = User;

@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 // -----------------------------------------------
 // ROUTES THAT REQUIRE AUTHENTICATION w/ JWT BELOW
 // -----------------------------------------------
-router.use(passport.authenticate('jwt', { session: false }));
+// router.use(passport.authenticate('jwt', { session: false }));
 
 //INDEX. Gets the saved cooking recipes
 router.get('/:id/recipes', function(req, res, next) {
@@ -36,11 +36,13 @@ router.put('/:id/recipes', function(req, res){
 		var recipe = new Recipe(req.body);
 		user.recipeHistory.push(recipe);
 		user.save(function(err){
-			console.log(err);
-			res.send(false);
-		} else {
-			res.send(user);
-		}
+			if(err){
+				console.log(err);
+				res.send(false);
+			} else {
+				res.send(user);
+			}
+		});
 	});
 });
 
