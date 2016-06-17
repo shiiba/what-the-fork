@@ -16,10 +16,6 @@ JwtOpts.jwtFromRequest = function(req) {
 
 JwtOpts.secretOrKey = process.env.JWT_SECRET;
 
-// TODO: Not needed?
-// JwtOpts.issuer = "accounts.examplesoft.com";
-// JwtOpts.audience = "yoursite.net";
-
 passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
     console.log( "JWT PAYLOAD" + util.inspect(jwt_payload));
 
