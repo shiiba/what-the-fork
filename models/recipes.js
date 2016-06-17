@@ -1,4 +1,3 @@
-var express = require('express');
 var mongoose = require('mongoose');
 
 var recipeSchema = new mongoose.Schema({
