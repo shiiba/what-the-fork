@@ -43,13 +43,19 @@ var CreateRecipeForm = React.createClass(
 
 var Index = React.createClass(
 	{getInitialState: function(){
-		return {ingredients: []};
+		return {
+      ingredients: [],
+      showResults: false
+    };
 	},
 	recipes(addIngredients){
 		var ingredients2 = this.state.ingredients.slice();
 		ingredients2.push(addIngredients);
 		this.setState({ingredients: ingredients2});
 	},
+  switchShowResults: function(){
+    this.setState({showResults: true});
+  },
 	render: function(){
 		var showIngredients = this.state.ingredients.map(function(addIngredients){
 			return(
@@ -59,11 +65,25 @@ var Index = React.createClass(
 				);
 		});
 		return(
-			<ul>
-				<CreateRecipeForm onListSubmit={this.recipes} /> 
-				{showIngredients}
-				{this.state.ingredients.length > 0 ? <SearchRecipesBtn ingredients={this.state.ingredients} /> : null }
-			</ul>);;
+			<div>
+        <div className={this.state.showResults ? "hidden" : "" }>
+          <ul>
+    				<CreateRecipeForm onListSubmit={this.recipes} /> 
+    				{showIngredients}
+    			</ul>
+        </div>
+        <div>
+          {this.state.ingredients.length > 0 ? 
+            <SearchRecipesBtn 
+              ingredients={this.state.ingredients} 
+              showResults={this.state.showResults} 
+              switchShowResults={this.switchShowResults} 
+            /> : 
+            null
+          }
+        </div>
+      </div>
+    );
 	}
 });
 
@@ -71,10 +91,7 @@ var Index = React.createClass(
 // return results and pass into results array
 var SearchRecipesBtn = React.createClass({
   getInitialState: function(){
-    return({
-      results: [],
-      showResults: false  // DO THIS HIGHER UP INSTEAD ^^
-    });
+    return({ results: [] });
   },
   handleResults: function(recipeData){
     var results2 = [];
@@ -88,10 +105,8 @@ var SearchRecipesBtn = React.createClass({
       results2.push(recipeItem);
     });
     console.log(results2);
-    this.setState({
-      results: results2,
-      showResults: true
-    });
+    this.props.switchShowResults();
+    this.setState({results: results2});
   },
   getResults: function(){
     var ingredientQuery = this.props.ingredients.join().toLowerCase();
@@ -111,7 +126,7 @@ var SearchRecipesBtn = React.createClass({
   render: function(){
     return(
       <div>
-        <div> 
+        <div className={this.props.showResults ? "hidden" : "" } >
           <button 
             onClick={this.getResults}
           >
@@ -123,7 +138,7 @@ var SearchRecipesBtn = React.createClass({
     );
   }
 });
-// { this.state.showResults ? 'className="hidden"' : null }
+
 // { this.state.showResults ? <Results /> : null } 
 // render <SearchResults results={this.state.results}/>
 // SearchResults also renders a button
