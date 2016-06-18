@@ -4,6 +4,11 @@ var passport = require('../config/passport.js');
 var User = require('../models/users.js');
 var Recipe = require('../models/recipes.js');
 var request = require('request');
+var util = require('util');
+
+function deepPrint(x){
+  console.log(util.inspect(x, {showHidden: false, depth: null}));
+}
 
 // ------------------------------
 // ROUTES THAT DON'T REQUIRE AUTH
@@ -21,9 +26,9 @@ router.post('/', function(req, res) {
 });
 
 router.post('/search', function(req,res){   // add in user ID?
-	var ingredientQuery = req.body;
-	console.log(ingredientQuery);
-  request('https://api.edamam.com/search?q=' + ingredientQuery + "&app_id=" + process.env.EDAMAM_ID + "&app_key=" + process.env.EDAMAM_KEY, function(error, response, body){
+	var ingredientQuery = req.body.ingredients;
+	deepPrint(ingredientQuery);
+  request("https://api.edamam.com/search?q=" + ingredientQuery + "&app_id=" + process.env.EDAMAM_ID + "&app_key=" + process.env.EDAMAM_KEY, function(error, response, body){
     if(!error && response.statusCode == 200){
     	results = JSON.parse(body);
     	res.send(results);

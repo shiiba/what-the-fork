@@ -107,14 +107,19 @@ var SearchRecipesBtn = React.createClass({
     console.log('==========');
     console.log(results2);
     this.props.switchShowResults();
-    this.setState({results: results2});
+    this.replaceState({results: results2});
   },
   getResults: function(){
-    var ingredientQuery = this.props.ingredients.join().toLowerCase();
+    var temp = [];
+    this.props.ingredients.forEach(function(ingredient){
+      temp.push(ingredient.ingredient);
+    });
+    var ingredientQuery = temp.join().toLowerCase();
+    console.log('ingredient query1:' + ingredientQuery);
     $.ajax({
       url: '/users/search',
       method: 'POST',
-      data: ingredientQuery,
+      data: {ingredients: ingredientQuery},
       success: function(data){
         // console.log(data.hits);
         this.handleResults(data.hits);
