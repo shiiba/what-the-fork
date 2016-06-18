@@ -29,7 +29,7 @@ var AppDisplay = React.createClass({
 		if(this.state.authenticatedUser === true) {
 			return (
 				<div>
-					<h1> SUCCESS </h1>
+					<Index />
 				</div>
 				) 
 		} else {
@@ -181,7 +181,79 @@ var SignupForm = React.createClass({
 			</div>
 			)
 	}
+});
 
+var Index = React.createClass(
+    {getInitialState: function(){
+        return {
+      ingredients: [],
+      showResults: false
+    };
+    },
+    recipes(addIngredients){
+        var ingredients2 = this.state.ingredients.slice();
+        ingredients2.push(addIngredients);
+        this.setState({ingredients: ingredients2});
+    },
+  switchShowResults: function(){
+    this.setState({showResults: true});
+  },
+    render: function(){
+        var showIngredients = this.state.ingredients.map(function(addIngredients){
+            return(
+                <div className="ingredientList">
+                    <li>{addIngredients.ingredient}</li>
+                </div>
+                );
+        });
+        return(
+            <div>
+        <div className={this.state.showResults ? "hidden" : "" }>
+          <ul>
+                    <CreateRecipeForm onListSubmit={this.recipes} /> 
+                    {showIngredients}
+                </ul>
+        </div>
+        <div>
+          {this.state.ingredients.length > 0 ? 
+            <SearchRecipesBtn 
+              ingredients={this.state.ingredients} 
+              showResults={this.state.showResults} 
+              switchShowResults={this.switchShowResults} 
+            /> : 
+            null
+          }
+        </div>
+      </div>
+    );
+    }
+});
+
+var CreateRecipeForm = React.createClass(
+    {getInitialState: function(){
+        return {ingredient: ""}
+    },
+    handleIngredientChange: function(e){
+        this.setState({ingredient: e.target.value});
+    },
+    handleSubmit: function(e){
+        e.preventDefault();
+        this.props.onListSubmit(
+            {ingredient: this.state.ingredient.trim()}
+            );
+        this.setState({ingredient: ""});
+    },
+    render: function(){
+        return(
+            <form className="createRecipeForm"
+                        onSubmit={this.handleSubmit}>
+                <input type="text"
+                             placeholder="Add an ingredient"
+                             value={this.state.ingredient}
+                             onChange={this.handleIngredientChange} />
+                <input type="submit" value="+" />
+            </form>);
+    }
 });
 
 // ajax call using this.props.ingredients
@@ -271,5 +343,5 @@ ReactDOM.render(
 	<AppDisplay/>
 	</div>,
 	 document.getElementById('container')
-	);
+);
 
