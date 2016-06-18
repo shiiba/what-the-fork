@@ -133,13 +133,12 @@ var SearchRecipesBtn = React.createClass({
             Search
           </button>
         </div>
-        
+        { this.state.showResults ? <RecipeList results={this.state.results} /> : null } 
       </div>
     );
   }
 });
 
-// { this.state.showResults ? <Results /> : null } 
 // render <SearchResults results={this.state.results}/>
 // SearchResults also renders a button
 
