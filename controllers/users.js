@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('../config/passport.js');
 var User = require('../models/users.js');
 var Recipe = require('../models/recipes.js');
+var request = require('request');
 
 // ------------------------------
 // ROUTES THAT DON'T REQUIRE AUTH
@@ -19,12 +20,24 @@ router.post('/', function(req, res) {
 	});
 });
 
+router.post('/search', function(req,res){   // add in user ID?
+	var ingredientQuery = req.body;
+	console.log(ingredientQuery);
+  request('https://api.edamam.com/search?q=' + ingredientQuery + "&app_id=" + process.env.EDAMAM_ID + "&app_key=" + process.env.EDAMAM_KEY, function(error, response, body){
+    if(!error && response.statusCode == 200){
+    	results = JSON.parse(body);
+    	res.send(results);
+    }
+  });
+});
+
 // -----------------------------------------------
 // ROUTES THAT REQUIRE AUTHENTICATION w/ JWT BELOW
 // -----------------------------------------------
 router.use(passport.authenticate('jwt', { session: false }));
 
 //INDEX. Gets the saved cooking recipes
+
 router.get('/:id/recipes', function(req, res, next) {
 	User.findById(req.params.id).then(function(user) {
 		res.send(user.recipeHistory)

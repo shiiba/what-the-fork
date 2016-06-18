@@ -87,6 +87,7 @@ var SearchRecipesBtn = React.createClass({
       }
       results2.push(recipeItem);
     });
+    console.log(results2);
     this.setState({
       results: results2,
       showResults: true
@@ -95,34 +96,35 @@ var SearchRecipesBtn = React.createClass({
   getResults: function(){
     var ingredientQuery = this.props.ingredients.join().toLowerCase();
     $.ajax({
-      url: 'https://api.edamam.com/search?q=' + ingredientQuery + "&app_id=" + process.env.EDAMAM_ID + "&app_key=" + process.env.EDAMAM_KEY,
-      method: 'GET',
+      url: '/users/search',
+      method: 'POST',
+      data: ingredientQuery,
       success: function(data){
-        console.log(data.hits);
+        // console.log(data.hits);
         this.handleResults(data.hits);
       }.bind(this),   // ensuring that the object being returned is the object being fed into the application
       error: function(xhr, status, err){
         console.error(status, err.toString());
       }.bind(this)
-    });
+    })
   },
-
   render: function(){
     return(
       <div>
-        <div { this.state.showResults ? 'className="hidden"' : null }> 
+        <div> 
           <button 
             onClick={this.getResults}
           >
             Search
           </button>
         </div>
-        { this.state.showResults ? <Results /> : null }
+        
       </div>
     );
   }
 });
-
+// { this.state.showResults ? 'className="hidden"' : null }
+// { this.state.showResults ? <Results /> : null } 
 // render <SearchResults results={this.state.results}/>
 // SearchResults also renders a button
 
