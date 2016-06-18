@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 // ajax call using this.props.ingredients
 // return results and pass into results array
-var SearchRecipes = React.createClass({
+var SearchRecipesBtn = React.createClass({
   getInitialState: function(){
     return({
       results: [],
@@ -47,7 +47,7 @@ var SearchRecipes = React.createClass({
   render: function(){
     return(
       <div>
-        <div { this.state.showResults ? 'className="hidden"' : null }>
+        <div { this.state.showResults ? 'className="hidden"' : null }> 
           <button 
             onClick={this.getResults}
           >
