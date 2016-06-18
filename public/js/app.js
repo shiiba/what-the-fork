@@ -72,10 +72,6 @@ var LoginForm = React.createClass({
 		console.log('password: ' + password);
 		this.loginAJAX(username, password);
 	},
-	newHandleClick: function(e) {
-		e.preventDefault();
-		console.log("I was clicked");
-	},
 	// },
 	// AJAX call. straight up jQuery baby!
 	loginAJAX: function(username, password) {
@@ -97,7 +93,7 @@ var LoginForm = React.createClass({
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
-			}.bind(this)
+			}.bind(this),
 		});
 	},
 
@@ -124,10 +120,10 @@ var LoginForm = React.createClass({
 var SignupForm = React.createClass({
 	getInitialState: function(){
 		return {
-		firstName: this.props.initialCreate,
-		lastName: this.props.initialCreate,	
-		username: this.props.initialCreate,
-		password: this.props.initialCreate
+			firstName: this.props.initialCreate,
+			lastName: this.props.initialCreate,	
+			username: this.props.initialCreate,
+			password: this.props.initialCreate
 		};
 	},
 	handleSignupFormChange: function(setName, e){
@@ -141,14 +137,12 @@ var SignupForm = React.createClass({
 		var lastName = this.state.lastName.trim();
 		var username = this.state.username.trim();
 		var password = this.state.password.trim();
+		this.signupAJAX(firstName, lastName, username, password);
 	},
-	newHandleClick: function(e){
-		e.preventDefault();
-		console.log("Let's create a new user!");
-	},
-	SignupAJAX: function(){
+	signupAJAX: function(firstName, lastName, username, password){
+		console.log('sending post request');
 		$.ajax({
-			url:'/',
+			url:'/users',
 			method: 'POST',
 			data: {
 				firstName: firstName,
