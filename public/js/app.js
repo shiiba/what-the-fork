@@ -104,6 +104,7 @@ var SearchRecipesBtn = React.createClass({
       }
       results2.push(recipeItem);
     });
+    console.log('==========');
     console.log(results2);
     this.props.switchShowResults();
     this.setState({results: results2});
@@ -133,7 +134,7 @@ var SearchRecipesBtn = React.createClass({
             Search
           </button>
         </div>
-        
+        { this.props.showResults ? <RecipeList results={this.state.results} /> : null } 
       </div>
     );
   }
@@ -143,6 +144,23 @@ var SearchRecipesBtn = React.createClass({
 // render <SearchResults results={this.state.results}/>
 // SearchResults also renders a button
 
+var RecipeList = React.createClass(
+  {render: function(){
+    console.log(this.props.results);
+    var list = this.props.results.map(function(data){
+      console.log(data);
+      return(
+        <div className="recipesList">
+          <h3>{data.label}</h3>
+          <img src={data.image}/>
+        </div>);
+    });
+    return(
+      <div>
+      {list}
+      </div>);
+  }
+});
 
 ReactDOM.render(
   <div>
