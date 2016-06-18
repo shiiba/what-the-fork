@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 // -----------------------------------------------
 // ROUTES THAT REQUIRE AUTHENTICATION w/ JWT BELOW
 // -----------------------------------------------
-// router.use(passport.authenticate('jwt', { session: false }));
+router.use(passport.authenticate('jwt', { session: false }));
 
 //INDEX. Gets the saved cooking recipes
 router.get('/:id/recipes', function(req, res, next) {
