@@ -150,13 +150,15 @@ var RecipeList = React.createClass(
     var list = this.props.results.map(function(data){
       console.log(data);
       return(
-        <div className="recipesList">
+        <div>
+          <hr/>
           <h3>{data.label}</h3>
           <img src={data.image}/>
-        </div>);
+        </div>
+);
     });
     return(
-      <div>
+      <div className="recipeList">
       {list}
       </div>);
   }

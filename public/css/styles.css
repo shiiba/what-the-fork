@@ -1,6 +1,7 @@
 .hidden{
   display: none;
 }
-.recipesList{
+.recipeList{
+	margin: 0 auto;
 	display: inline-block;
 }
