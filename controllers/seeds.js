@@ -9,7 +9,7 @@ router.get('/', function(req, res){
 	var user1 = new User({
 		firstName: 'Joe',
 		lastName: 'Jungle',
-		email: 'joe@jit.com',
+		username: 'joe@jit.com',
 		password: 'password',
 		recipeHistory: []
 	});

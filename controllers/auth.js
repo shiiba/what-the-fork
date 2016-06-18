@@ -7,11 +7,14 @@ var jwt = require('jsonwebtoken');
 // INTIALIZING PASSPORT
 router.use(passport.initialize());
 
+router.get('/', function(req, res) {
+	res.send('meow')
+});
 
 // IF LOGIN IS SUCCESSFUL, TOKEN IS SENT BACK
 router.post('/', passport.authenticate('local', { session: false }), function(req, res, next) {
 	console.log('CAN YOU HEAR ME??');
-  	console.log('==========================');
+  console.log('==========================');
 	console.log('req.body: ' + req.body);
   // console.log('USER:' + req.user.email);
 	console.log('==========================');
