@@ -213,7 +213,7 @@ var Index = React.createClass({
       this.setState({ingredients: ingredients2});
   },
   switchShowResults: function(){
-    this.setState({showResults: !showResults});
+    this.setState({showResults: !this.state.showResults});
   },
   handleHistory: function(data){
     console.log('firstName: ' + data.firstName);
@@ -223,6 +223,15 @@ var Index = React.createClass({
       recipeHistory: data.recipeHistory,
       showProfile: true
     });
+  },
+  handleReset: function(){
+    this.setState({
+      ingredients: [],
+      showResults: false,
+      showProfile: false,
+      firstName: '',
+      recipeHistory: []
+    })
   },
   render: function(){
       var showIngredients = this.state.ingredients.map(function(addIngredients){
@@ -234,6 +243,12 @@ var Index = React.createClass({
       });
       return(
         <div>
+          <nav>
+            <button className="srch-btn" onClick={this.handleReset}>
+            New Search
+            </button>
+          </nav>
+          <br/>
           <div className={this.state.showProfile ? "hidden" : ""}>
             <UserProfileLink 
               handleHistory={this.handleHistory}
