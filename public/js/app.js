@@ -14,6 +14,7 @@ var AppDisplay = React.createClass({
 		}
 		return {
 			authenticatedUser: cookieCheck,
+      userId: null
 		};
 	},
 	changeLogin: function() {
@@ -21,6 +22,10 @@ var AppDisplay = React.createClass({
 			authenticatedUser: true
 		})
 	},
+  handleId: function(userId){
+    console.log(userId);
+    this.setState({userId: userId});
+  }, 
 	render: function(){
 		console.log('authenticatedUser: ', this.state.authenticatedUser);
 		console.log('==================================');
@@ -29,14 +34,22 @@ var AppDisplay = React.createClass({
 		if(this.state.authenticatedUser === true) {
 			return (
 				<div>
-					<Index />
+					<Index userId={this.state.userId}/>
 				</div>
 				) 
 		} else {
 			return (
 				<div>
-  				<LoginForm initalLoginCheck={this.state.authenticatedUser} onChange={this.changeLogin}/>
-  				<SignupForm initialCreate={this.state.authenticatedUser} onChange={this.changeLogin}/>
+  				<LoginForm 
+            initalLoginCheck={this.state.authenticatedUser} 
+            onChange={this.changeLogin}
+            handleId={this.handleId}
+          />
+  				<SignupForm 
+            initialCreate={this.state.authenticatedUser} 
+            onChange={this.changeLogin}
+            handleId={this.handleId}
+          />
 				</div>
 			)
 		}
@@ -88,8 +101,8 @@ var LoginForm = React.createClass({
 				console.log('Cookie Monster');
 				Cookies.set('jwt_token', data.token);
 				console.log(data);
-				// Let's invoke that sweet callback to the parent component
 				this.props.onChange(data.token)
+        this.props.handleId(data.userId);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
@@ -152,7 +165,8 @@ var SignupForm = React.createClass({
 			},
 			success: function(data){
 				console.log("A new user signing up!!");
-				Cookies.set('jwt_token', data.token)
+				Cookies.set('jwt_token', data.token);
+        this.props.handleId(data.userId);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
@@ -220,6 +234,7 @@ var Index = React.createClass(
               ingredients={this.state.ingredients} 
               showResults={this.state.showResults} 
               switchShowResults={this.switchShowResults} 
+              userId={this.props.userId}
             /> : 
             null
           }
@@ -308,7 +323,7 @@ var SearchRecipesBtn = React.createClass({
             Search
           </button>
         </div>
-        { this.props.showResults ? <RecipeList results={this.state.results} /> : null } 
+        { this.props.showResults ? <RecipeList results={this.state.results} userId={this.props.userId} /> : null } 
       </div>
     );
   }
@@ -318,25 +333,77 @@ var SearchRecipesBtn = React.createClass({
 // render <SearchResults results={this.state.results}/>
 // SearchResults also renders a button
 
-var RecipeList = React.createClass(
-  {render: function(){
-    console.log(this.props.results);
+var RecipeList = React.createClass({
+  addRecipe: function(data){
+    console.log('clicked da button');
+    $.ajax({
+        url: '/users/' + this.props.userId + '/recipes',
+        method: 'PUT',
+        data: {
+            label: data.label,
+            image: data.image,
+            uri: data.uri,
+            ingredients: data.ingredients
+        },
+        success: function(data){
+          console.log('we in da club');
+          console.log(data);
+        }.bind(this),
+        error: function(xhr, status, err){
+            console.log(status, err.toString());
+        }.bind(this)
+    })
+  },
+  render: function(){
+    // console.log(this.props.results);
+    var self = this;
     var list = this.props.results.map(function(data){
-      console.log(data);
+      var callback = function(){
+        self.addRecipe(data);
+      };
       return(
         <div>
           <hr/>
           <h3>{data.label}</h3>
           <img src={data.image}/>
+          <button
+            onClick={callback}
+            className="add-btn"
+          >
+            I'll Forking Cook This
+          </button>
         </div>
-);
+      );
     });
     return(
       <div className="recipeList">
       {list}
-      </div>);
+      </div>
+    );
   }
 });
+
+// var AddRecipeBtn = React.createClass({
+//   addRecipe: function(data){
+//     $.ajax({
+//         url: '/users/' + this.props.id + '/recipes',
+//         method: 'PUT',
+//         data: {
+//             label: data.label,
+//             image: data.image,
+//             uri: data.uri,
+//             ingredients: data.ingredients
+//         },
+//         success: function(data){
+//             console.log('we in da club');
+//         }.bind(this),
+//         error: function(xhr, status, err){
+//             console.log(status, err.toString());
+//         }.bind(this)
+//     })
+//   },
+
+// });
 
 ReactDOM.render(
 	<div>
