@@ -268,6 +268,15 @@ var Index = React.createClass({
       showProfile: true
     });
   },
+  handleReset: function(){
+    this.setState({
+      ingredients: [],
+      showResults: false,
+      showProfile: false,
+      firstName: '',
+      recipeHistory: []
+    })
+  },
   render: function(){
     var showIngredients = this.state.ingredients.map(function(addIngredients){
       return(
@@ -278,28 +287,34 @@ var Index = React.createClass({
     });
     return(
       <div>
-        <div className={this.state.showProfile ? "hidden" : ""}>
-          <UserProfileLink 
-            handleHistory={this.handleHistory}
-            userId={this.props.userId}
-          />
-          <div className={this.state.showResults ? "hidden" : "" }>
-            <ul>
-              <CreateRecipeForm onListSubmit={this.recipes} /> 
-              {showIngredients}
-            </ul>
+        <nav>
+          <button className="srch-btn" onClick={this.handleReset}>
+          New Search
+          </button>
+          <div className={this.state.showProfile ? "hidden" : ""}>
+            <UserProfileLink 
+              handleHistory={this.handleHistory}
+              userId={this.props.userId}
+            />
           </div>
-          <div>
-            {this.state.ingredients.length > 0 ? 
-              <SearchRecipesBtn 
-                ingredients={this.state.ingredients} 
-                showResults={this.state.showResults} 
-                switchShowResults={this.switchShowResults} 
-                userId={this.props.userId}
-              /> : 
-              null
-            }
-          </div>
+        </nav>
+        <br/>
+        <div className={this.state.showResults ? "hidden" : "" }>
+          <ul>
+            <CreateRecipeForm onListSubmit={this.recipes} /> 
+            {showIngredients}
+          </ul>
+        </div>
+        <div>
+          {this.state.ingredients.length > 0 ? 
+            <SearchRecipesBtn 
+              ingredients={this.state.ingredients} 
+              showResults={this.state.showResults} 
+              switchShowResults={this.switchShowResults} 
+              userId={this.props.userId}
+            /> : 
+            null
+          }
         </div>
         <div className={this.state.showProfile ? "" : "hidden"}>
           <UserProfile 
@@ -476,6 +491,7 @@ var UserProfileLink = React.createClass({
     return(
       <button
         onClick={this.getHistoryAJAX}
+        className="srch-btn"
       >
         User Profile
       </button>
