@@ -338,6 +338,39 @@ var RecipeList = React.createClass(
   }
 });
 
+var UserProfile = React.createClass({
+	getInitialState: function(){
+		return { 
+			firstName: '',
+			recipeHistory: []
+		};
+	},
+	getHistoryAJAX: function(){
+		$.ajax({
+			url: '/users/' + this.props.id + '/recipes/',
+			method: 'GET',
+			success: function(data){
+				this.setState({
+					firstName: data.firstName,
+					recipeHistory: data.recipeHistory
+					console.log("getting user saved results");
+				});
+				}.bind(this),
+				error: function(xhr, status, err){
+					console.error(status, err.toString());
+				}.bind(this)
+			})
+	},
+	render: function(){
+		return(
+			<div className="saved-user-history">
+			<li>{this.state.recipeHistory}</li>
+			<li>{this.state.firstName}</li>
+			</div>
+			);
+	}
+});
+
 ReactDOM.render(
 	<div>
 	<AppDisplay/>
