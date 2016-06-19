@@ -20,14 +20,14 @@ passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
     console.log( "JWT PAYLOAD" + util.inspect(jwt_payload));
 
     // User.findOne({id: jwt_payload.sub}, function(err, user) {
-    User.findOne({email: jwt_payload._doc.email}, function(err, user) {
+    User.findOne({username: jwt_payload._doc.username}, function(err, user) {
 
         if (err) {
             return done(err, false);
         }
 
         if (user) {
-            console.log("user is " + user.email)
+            console.log("user is " + user.username)
             done(null, user);
         } else {
             done(null, false);
@@ -37,9 +37,12 @@ passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
 }));
 
 passport.use( new LocalStrategy(
-  function( email, password, done ) {
-    User.findOne({ email: email }, function( err, dbUser ) {
-      if (err) { return done(err); }
+  function(username, password, done ) {
+    console.log('we out here fam')
+    User.findOne({ username: username }, function( err, dbUser ) {
+      if (err) { 
+        console.log('don work fam');
+        return done(err); }
       if (!dbUser) {
         // If we want to send back flash messages with a description of the error
         // We would need to install express-flash for this to work
