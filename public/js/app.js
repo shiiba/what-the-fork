@@ -383,28 +383,6 @@ var RecipeList = React.createClass({
   }
 });
 
-// var AddRecipeBtn = React.createClass({
-//   addRecipe: function(data){
-//     $.ajax({
-//         url: '/users/' + this.props.id + '/recipes',
-//         method: 'PUT',
-//         data: {
-//             label: data.label,
-//             image: data.image,
-//             uri: data.uri,
-//             ingredients: data.ingredients
-//         },
-//         success: function(data){
-//             console.log('we in da club');
-//         }.bind(this),
-//         error: function(xhr, status, err){
-//             console.log(status, err.toString());
-//         }.bind(this)
-//     })
-//   },
-
-// });
-
 ReactDOM.render(
 	<div>
 	<AppDisplay/>
