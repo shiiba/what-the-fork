@@ -197,51 +197,78 @@ var SignupForm = React.createClass({
 	}
 });
 
-var Index = React.createClass(
-    {getInitialState: function(){
-        return {
+var Index = React.createClass({
+  getInitialState: function(){
+    return {
       ingredients: [],
-      showResults: false
+      showResults: false,
+      showProfile: false,
+      firstName: '',
+      recipeHistory: []
     };
-    },
-    recipes(addIngredients){
-        var ingredients2 = this.state.ingredients.slice();
-        ingredients2.push(addIngredients);
-        this.setState({ingredients: ingredients2});
-    },
-  switchShowResults: function(){
-    this.setState({showResults: true});
   },
-    render: function(){
-        var showIngredients = this.state.ingredients.map(function(addIngredients){
-            return(
-                <div className="ingredientList">
-                    <li>{addIngredients.ingredient}</li>
-                </div>
-                );
-        });
+  recipes(addIngredients){
+      var ingredients2 = this.state.ingredients.slice();
+      ingredients2.push(addIngredients);
+      this.setState({ingredients: ingredients2});
+  },
+  switchShowResults: function(){
+    this.setState({showResults: !showResults});
+  },
+  switchShowProfile: function(){
+    this.setState({showProfile: !showProfile});
+  },
+  handleHistory: function(data){
+    console.log(data);
+    this.setState({
+      firstName: data.firstName,
+      recipeHistory: data.recipeHistory
+    });
+  },
+  render: function(){
+      var showIngredients = this.state.ingredients.map(function(addIngredients){
         return(
-            <div>
-        <div className={this.state.showResults ? "hidden" : "" }>
-          <ul>
-                    <CreateRecipeForm onListSubmit={this.recipes} /> 
-                    {showIngredients}
-                </ul>
-        </div>
+          <div className="ingredientList">
+              <li>{addIngredients.ingredient}</li>
+          </div>
+        );
+      });
+      return(
         <div>
-          {this.state.ingredients.length > 0 ? 
-            <SearchRecipesBtn 
-              ingredients={this.state.ingredients} 
-              showResults={this.state.showResults} 
-              switchShowResults={this.switchShowResults} 
+          <div className={this.state.showProfile ? "hidden" : ""}>
+            <UserProfileLink 
+              handleHistory={this.handleHistory}
+              switchShowProfile={this.switchShowProfile}
               userId={this.props.userId}
-            /> : 
-            null
-          }
+            />
+            <div className={this.state.showResults ? "hidden" : "" }>
+              <ul>
+                <CreateRecipeForm onListSubmit={this.recipes} /> 
+                {showIngredients}
+              </ul>
+            </div>
+            <div>
+              {this.state.ingredients.length > 0 ? 
+                <SearchRecipesBtn 
+                  ingredients={this.state.ingredients} 
+                  showResults={this.state.showResults} 
+                  switchShowResults={this.switchShowResults} 
+                  userId={this.props.userId}
+                /> : 
+                null
+              }
+            </div>
+          </div>
+          <div className={this.state.showProfile ? "" : "hidden"}>
+            <UserProfile 
+              userId={this.props.userId} 
+              firstName={this.state.firstName}
+              recipeHistory={this.state.recipeHistory}
+            />
+          </div>
         </div>
-      </div>
-    );
-    }
+  );
+  }
 });
 
 var CreateRecipeForm = React.createClass(
@@ -383,36 +410,55 @@ var RecipeList = React.createClass({
   }
 });
 
+var UserProfileLink = React.createClass({
+  getHistoryAJAX: function(){
+    console.log('getting history via AJAX');
+    $.ajax({
+      url: '/users/' + this.props.userId + '/recipes/',
+      method: 'GET',
+      success: function(data){
+        this.props.handleHistory(data);
+        this.props.switchShowProfile();
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.error(status, err.toString());
+      }.bind(this)
+    })
+  },
+  render: function(){
+    return(
+      <button
+        onClick={this.getHistoryAJAX}
+      >
+        User Profile
+      </button>
+    );
+  }
+});
+
 var UserProfile = React.createClass({
-	getInitialState: function(){
-		return { 
-			firstName: '',
-			recipeHistory: []
-		};
-	},
-	getHistoryAJAX: function(){
-		$.ajax({
-			url: '/users/' + this.props.id + '/recipes/',
-			method: 'GET',
-			success: function(data){
-				this.setState({
-					firstName: data.firstName,
-					recipeHistory: data.recipeHistory
-					console.log("getting user saved results");
-				});
-				}.bind(this),
-				error: function(xhr, status, err){
-					console.error(status, err.toString());
-				}.bind(this)
-			})
-	},
 	render: function(){
-		return(
+    var recipes = this.props.recipeHistory.map(function(recipe){
+      var ingredients = recipe.ingredients.map(function(ingredient){
+        return(
+          <li>{ingredient}</li>
+        );
+      });
+      return(
+        <div>
+          <h4>{recipe.label}</h4>
+          <img src={recipe.image}/>
+          <span>Url: {recipe.uri}</span>
+          <ul>{ingredients}</ul>
+        </div>
+      );
+    });
+    return(
 			<div className="saved-user-history">
-			<li>{this.state.recipeHistory}</li>
-			<li>{this.state.firstName}</li>
+        <h2>{this.props.firstName}</h2>
+        {recipes}
 			</div>
-			);
+		);
 	}
 });
 
