@@ -215,14 +215,13 @@ var Index = React.createClass({
   switchShowResults: function(){
     this.setState({showResults: !showResults});
   },
-  switchShowProfile: function(){
-    this.setState({showProfile: !showProfile});
-  },
   handleHistory: function(data){
-    console.log(data);
+    console.log('firstName: ' + data.firstName);
+    console.log('recipeHistory: ' + data.recipeHistory);
     this.setState({
       firstName: data.firstName,
-      recipeHistory: data.recipeHistory
+      recipeHistory: data.recipeHistory,
+      showProfile: true
     });
   },
   render: function(){
@@ -238,7 +237,6 @@ var Index = React.createClass({
           <div className={this.state.showProfile ? "hidden" : ""}>
             <UserProfileLink 
               handleHistory={this.handleHistory}
-              switchShowProfile={this.switchShowProfile}
               userId={this.props.userId}
             />
             <div className={this.state.showResults ? "hidden" : "" }>
@@ -417,8 +415,9 @@ var UserProfileLink = React.createClass({
       url: '/users/' + this.props.userId + '/recipes/',
       method: 'GET',
       success: function(data){
+        console.log('ajax return data: ' + data);
         this.props.handleHistory(data);
-        this.props.switchShowProfile();
+        console.log('history called');
       }.bind(this),
       error: function(xhr, status, err){
         console.error(status, err.toString());
@@ -446,10 +445,11 @@ var UserProfile = React.createClass({
       });
       return(
         <div>
-          <h4>{recipe.label}</h4>
-          <img src={recipe.image}/>
-          <span>Url: {recipe.uri}</span>
+          <h4>{recipe.label}</h4><br/>
+          <img src={recipe.image}/><br/>
+          <a href={recipe.uri}>View Recipe</a><br/>
           <ul>{ingredients}</ul>
+          <hr/>
         </div>
       );
     });
