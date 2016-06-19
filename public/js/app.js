@@ -34,7 +34,9 @@ var AppDisplay = React.createClass({
 		if(this.state.authenticatedUser === true) {
 			return (
 				<div>
-					<Index userId={this.state.userId}/>
+					<Index 
+            userId={this.state.userId}
+          />
 				</div>
 				) 
 		} else {
@@ -59,24 +61,17 @@ var AppDisplay = React.createClass({
 
 var LoginForm = React.createClass({
 	getInitialState: function() {
-		// I chose to have the loginform maintain it's own state as it does meaningful things with data
-		// For the form purposes: keep track of username, password
-		// For invoking the callback prop, set a state for loginStatus. This is the original parent state for this.state.authenticatedUser
 		return {
 			username: this.props.initialLoginCheck,
 			password: this.props.initialLoginCheck,
 			loginStatus: this.props.initialLoginCheck
 		};
 	},
-
-	// This is a cool helper function. On the form, it will update the input values that user's type into the form
 	handleLoginFormChange: function(stateName, e) {
 		var change = {};
 		change[stateName] = e.target.value;
 		this.setState(change);
 	},
-
-	// So form gets submitted, prevent default, trim, and send the ajaxcall!
 	handleSubmit: function(e) {
 		e.preventDefault();
 		var username = this.state.username.trim();
@@ -85,8 +80,6 @@ var LoginForm = React.createClass({
 		console.log('password: ' + password);
 		this.loginAJAX(username, password);
 	},
-	// },
-	// AJAX call. straight up jQuery baby!
 	loginAJAX: function(username, password) {
     console.log(username);
     console.log(password);
@@ -109,24 +102,39 @@ var LoginForm = React.createClass({
 			}.bind(this),
 		});
 	},
-
-	// Here's my sexy form
 	render: function() {
-		// console.log(this);
-		return (
+		return(
 			<div className="login-form" >
 				<h3>Please Login</h3>
 				<form onSubmit={this.handleSubmit}>
-					<label htmlFor="username">username</label>
-					<input className="username-login-form" type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
-					<br/>
-					<label htmlFor="password">Password</label>
-					<input className="password-login-form" type="text" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
-					<br/>
-					<input type="submit"/>
+					<label 
+            htmlFor="username"
+          >
+            Username
+          </label>
+					<input 
+            className="username-login-form" 
+            type="text" 
+            value={this.state.username} 
+            onChange={this.handleLoginFormChange.bind(this, 'username')}
+          /><br/>
+					<label 
+            htmlFor="password"
+          >
+            Password
+          </label>
+					<input 
+            className="password-login-form" 
+            type="text" 
+            value={this.state.password} 
+            onChange={this.handleLoginFormChange.bind(this, 'password')}
+          /><br/>
+					<input 
+            type="submit"
+          />
 				</form>
 			</div>
-		)
+		);
 	}
 })
 
@@ -176,24 +184,60 @@ var SignupForm = React.createClass({
 	render: function(){
 		return(
 			<div className="signup-form">
-			<h3> Create An Account </h3>
-			<form onSubmit={this.handleSubmit}>
-			<label htmlFor="firstName"> First Name </label>
-			<input className="first-name-create" type="text" value={this.state.firstName} onChange={this.handleSignupFormChange.bind(this,'firstName')}/>
-			<br/>
-			<label htmlFor="lastName"> Last Name </label>
-			<input className="last-name-create" type="text" value={this.state.lastName} onChange={this.handleSignupFormChange.bind(this,'lastName')}/>
-			<br/>
-			<label htmlFor="username"> username </label>
-			<input className="username-create" type="text" value={this.state.username} onChange={this.handleSignupFormChange.bind(this,'username')}/>
-			<br/>
-			<label htmlFor="password"> Password </label>
-			<input className="password-create" type="text" value={this.state.password} onChange={this.handleSignupFormChange.bind(this,'password')}/>
-			<br/>
-			<input type="submit"/>
-			</form>
+  			<h3> Create An Account </h3>
+  			<form 
+          onSubmit={this.handleSubmit}
+        >
+  			<label 
+          htmlFor="firstName"
+        > 
+          First Name 
+        </label>
+  			<input 
+          className="first-name-create" 
+          type="text" 
+          value={this.state.firstName} 
+          onChange={this.handleSignupFormChange.bind(this,'firstName')}
+        /><br/>
+  			<label 
+          htmlFor="lastName"
+        > 
+          Last Name 
+        </label>
+  			<input 
+          className="last-name-create" 
+          type="text" 
+          value={this.state.lastName} 
+          onChange={this.handleSignupFormChange.bind(this,'lastName')}
+        /><br/>
+  			<label 
+          htmlFor="username"
+        > 
+          Username 
+        </label>
+  			<input 
+          className="username-create" 
+          type="text" 
+          value={this.state.username} 
+          onChange={this.handleSignupFormChange.bind(this,'username')}
+        /><br/>
+  			<label 
+          htmlFor="password"
+        >
+            Password 
+        </label>
+  			<input 
+          className="password-create" 
+          type="text" 
+          value={this.state.password} 
+          onChange={this.handleSignupFormChange.bind(this,'password')}
+        /><br/>
+  			<input 
+          type="submit"
+        />
+  			</form>
 			</div>
-			)
+		);
 	}
 });
 
@@ -213,7 +257,7 @@ var Index = React.createClass({
       this.setState({ingredients: ingredients2});
   },
   switchShowResults: function(){
-    this.setState({showResults: !showResults});
+    this.setState({showResults: !this.state.showResults});
   },
   handleHistory: function(data){
     console.log('firstName: ' + data.firstName);
@@ -225,74 +269,82 @@ var Index = React.createClass({
     });
   },
   render: function(){
-      var showIngredients = this.state.ingredients.map(function(addIngredients){
-        return(
-          <div className="ingredientList">
-              <li>{addIngredients.ingredient}</li>
-          </div>
-        );
-      });
+    var showIngredients = this.state.ingredients.map(function(addIngredients){
       return(
-        <div>
-          <div className={this.state.showProfile ? "hidden" : ""}>
-            <UserProfileLink 
-              handleHistory={this.handleHistory}
-              userId={this.props.userId}
-            />
-            <div className={this.state.showResults ? "hidden" : "" }>
-              <ul>
-                <CreateRecipeForm onListSubmit={this.recipes} /> 
-                {showIngredients}
-              </ul>
-            </div>
-            <div>
-              {this.state.ingredients.length > 0 ? 
-                <SearchRecipesBtn 
-                  ingredients={this.state.ingredients} 
-                  showResults={this.state.showResults} 
-                  switchShowResults={this.switchShowResults} 
-                  userId={this.props.userId}
-                /> : 
-                null
-              }
-            </div>
+        <div className="ingredientList">
+            <li>{addIngredients.ingredient}</li>
+        </div>
+      );
+    });
+    return(
+      <div>
+        <div className={this.state.showProfile ? "hidden" : ""}>
+          <UserProfileLink 
+            handleHistory={this.handleHistory}
+            userId={this.props.userId}
+          />
+          <div className={this.state.showResults ? "hidden" : "" }>
+            <ul>
+              <CreateRecipeForm onListSubmit={this.recipes} /> 
+              {showIngredients}
+            </ul>
           </div>
-          <div className={this.state.showProfile ? "" : "hidden"}>
-            <UserProfile 
-              userId={this.props.userId} 
-              firstName={this.state.firstName}
-              recipeHistory={this.state.recipeHistory}
-            />
+          <div>
+            {this.state.ingredients.length > 0 ? 
+              <SearchRecipesBtn 
+                ingredients={this.state.ingredients} 
+                showResults={this.state.showResults} 
+                switchShowResults={this.switchShowResults} 
+                userId={this.props.userId}
+              /> : 
+              null
+            }
           </div>
         </div>
-  );
+        <div className={this.state.showProfile ? "" : "hidden"}>
+          <UserProfile 
+            userId={this.props.userId} 
+            firstName={this.state.firstName}
+            recipeHistory={this.state.recipeHistory}
+          />
+        </div>
+      </div>
+    );
   }
 });
 
 var CreateRecipeForm = React.createClass(
     {getInitialState: function(){
-        return {ingredient: ""}
+      return {ingredient: ""}
     },
     handleIngredientChange: function(e){
-        this.setState({ingredient: e.target.value});
+      this.setState({ingredient: e.target.value}); 
     },
     handleSubmit: function(e){
-        e.preventDefault();
-        this.props.onListSubmit(
-            {ingredient: this.state.ingredient.trim()}
-            );
-        this.setState({ingredient: ""});
+      e.preventDefault();
+      this.props.onListSubmit(
+        {ingredient: this.state.ingredient.trim()}
+      );
+      this.setState({ingredient: ""});
     },
     render: function(){
-        return(
-            <form className="createRecipeForm"
-                        onSubmit={this.handleSubmit}>
-                <input type="text"
-                             placeholder="Add an ingredient"
-                             value={this.state.ingredient}
-                             onChange={this.handleIngredientChange} />
-                <input type="submit" value="+" />
-            </form>);
+      return(
+        <form 
+          className="createRecipeForm"
+          onSubmit={this.handleSubmit}
+        >
+          <input 
+            type="text"
+            placeholder="Add an ingredient"
+            value={this.state.ingredient}
+            onChange={this.handleIngredientChange} 
+          />
+          <input 
+            type="submit" 
+            value="+" 
+          />
+        </form>
+      );
     }
 });
 
@@ -353,10 +405,6 @@ var SearchRecipesBtn = React.createClass({
     );
   }
 });
-
-// { this.state.showResults ? <Results /> : null } 
-// render <SearchResults results={this.state.results}/>
-// SearchResults also renders a button
 
 var RecipeList = React.createClass({
   addRecipe: function(data){
