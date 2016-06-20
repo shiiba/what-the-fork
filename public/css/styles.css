@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'icons';
+  src: url('../fonts/Avenir.ttc');
+}
+@font-face{
+	font-family: 'name';
+	src: url('../fonts/DK-Lemon-Yellow-Sun.otf');
+}
 .hidden{
   display: none;
 }
@@ -17,4 +25,32 @@ nav{
 	color: white;
 	border: none;
 	float: right;
+}
+.saved-user-history img {
+	border: 3px solid black;
+}
+.saved-user-history div{
+	text-align: center;
+	padding: 20px;
+}
+.saved-user-history a {
+	padding: 5em;
+	font-family: 'icons';
+	font-size: 18px; 
+}
+.saved-user-history h4{
+	font-family: 'icons';
+	font-size: 20px;
+}
+.saved-user-history h2 {
+	font-family: 'name';
+	font-size: 50px;
+	text-align: right;
+	margin: 0px;
+	padding: 20px;
+}
+.saved-user-history ul li {
+	list-style-type: none;
+	font-family: 'icons';
+	padding: 0px;
 }
