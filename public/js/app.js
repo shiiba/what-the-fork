@@ -13,8 +13,7 @@ var AppDisplay = React.createClass({
 			cookieCheck = '';
 		}
 		return {
-			authenticatedUser: cookieCheck,
-      userId: null
+			authenticatedUser: cookieCheck
 		};
 	},
 	changeLogin: function() {
@@ -22,10 +21,6 @@ var AppDisplay = React.createClass({
 			authenticatedUser: true
 		})
 	},
-  handleId: function(userId){
-    console.log(userId);
-    this.setState({userId: userId});
-  }, 
 	render: function(){
 		console.log('authenticatedUser: ', this.state.authenticatedUser);
 		console.log('==================================');
@@ -34,9 +29,7 @@ var AppDisplay = React.createClass({
 		if(this.state.authenticatedUser === true) {
 			return (
 				<div>
-					<Index 
-            userId={this.state.userId}
-          />
+					<Index />
 				</div>
 				) 
 		} else {
@@ -95,7 +88,6 @@ var LoginForm = React.createClass({
 				Cookies.set('jwt_token', data.token);
 				console.log(data);
 				this.props.onChange(data.token)
-        this.props.handleId(data.userId);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
@@ -174,7 +166,6 @@ var SignupForm = React.createClass({
 			success: function(data){
 				console.log("A new user signing up!!");
 				Cookies.set('jwt_token', data.token);
-        this.props.handleId(data.userId);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
@@ -294,7 +285,6 @@ var Index = React.createClass({
           <div className={this.state.showProfile ? "hidden" : ""}>
             <UserProfileLink 
               handleHistory={this.handleHistory}
-              userId={this.props.userId}
             />
           </div>
         </nav>
@@ -311,14 +301,12 @@ var Index = React.createClass({
               ingredients={this.state.ingredients} 
               showResults={this.state.showResults} 
               switchShowResults={this.switchShowResults} 
-              userId={this.props.userId}
             /> : 
             null
           }
         </div>
         <div className={this.state.showProfile ? "" : "hidden"}>
           <UserProfile 
-            userId={this.props.userId} 
             firstName={this.state.firstName}
             recipeHistory={this.state.recipeHistory}
           />
@@ -416,7 +404,7 @@ var SearchRecipesBtn = React.createClass({
             Search
           </button>
         </div>
-        { this.props.showResults ? <RecipeList results={this.state.results} userId={this.props.userId} /> : null } 
+        { this.props.showResults ? <RecipeList results={this.state.results} /> : null } 
       </div>
     );
   }
@@ -426,7 +414,7 @@ var RecipeList = React.createClass({
   addRecipe: function(data){
     console.log('clicked da button');
     $.ajax({
-        url: '/users/' + this.props.userId + '/recipes',
+        url: '/users/recipes',
         method: 'PUT',
         data: {
             label: data.label,
@@ -509,7 +497,7 @@ var UserProfileLink = React.createClass({
   getHistoryAJAX: function(){
     console.log('getting history via AJAX');
     $.ajax({
-      url: '/users/' + this.props.userId + '/recipes/',
+      url: '/users/recipes/',
       method: 'GET',
       success: function(data){
         console.log('ajax return data: ' + data);

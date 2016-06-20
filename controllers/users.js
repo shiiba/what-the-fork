@@ -43,15 +43,15 @@ router.use(passport.authenticate('jwt', { session: false }));
 
 //INDEX. Gets the saved cooking recipes
 
-router.get('/:id/recipes', function(req, res, next) {
-	User.findById(req.params.id).then(function(user) {
+router.get('/recipes', function(req, res, next) {
+  User.findById(req.user.id).then(function(user) {
     console.log(user);
     res.send(user);
 	});
 });
 
-router.put('/:id/recipes', function(req, res){
-	User.findById(req.params.id).then(function(user){
+router.put('/recipes', function(req, res){
+	User.findById(req.user.id).then(function(user){
 		var recipe = new Recipe(req.body);
 		user.recipeHistory.push(recipe);
 		user.save(function(err){
