@@ -1,3 +1,16 @@
+@font-face{
+	font-family: "Avenir";
+	src: url(../fonts/avenir.ttc);
+}
+@font-face{
+	font-family: "Gradies";
+	src: url(../fonts/Gradies.ttf);
+}
+@font-face{
+	font-family: "PeaxWebdesignFreeIcons";
+	src: url(../fonts/PeaxWebdesignFreeIcons.ttf);
+}
+
 body{
 	margin: 0;
 	padding: 0;
@@ -147,7 +160,5 @@ img{
 	color: #191953;
 	list-style: none;
 }
-{
 
-}
 
