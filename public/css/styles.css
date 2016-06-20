@@ -15,27 +15,42 @@
 	src: url('../fonts/DK-Lemon-Yellow-Sun.otf');
 }
 
+html{
+	margin: 0px;
+	padding: 0px;
+	overflow: scroll;
+}
 body{
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
 }
 
 .hidden{
   display: none;
 }
 .recipeList{
+	background-color: transparent;
+}
+.second-container{
 	background-color: white;
+	height: ;
 }
 .login{
 	float: left;
 	width: 480px;
 	margin-top: 30px;
+	background-color: white;
+}
+.forms{
+	display: inline-block;
+	background-color: white;
 }
 .signup{
 	float: left;
 	width: 482px;
 	margin-top: 30px;
-	border-right: 2px solid #191953;
+	background-color: white;
 }
 .login-form{
 	font-family: 'Avenir';
@@ -59,9 +74,9 @@ body{
 }
 nav{
 	font-family: 'PeaxWebdesignFreeIcons';
-	font-size: 70px;
+	font-size: 80px;
 	color: white;
-	height: 80px;
+	height: 100px;
 	width: 100%;
 	padding-left: 5px;
 	background-color: #191953;
@@ -76,44 +91,63 @@ nav{
 	border: none;
 	float: right;
 	font-family: 'Avenir';
+	font-size: 22px;
+}
+.new-btn:hover{
+	color: #ffff94;
 	font-size: 25px;
 }
 
-.indexPage{
-	background: linear-gradient: (rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
-	background: url('https://images.unsplash.com/photo-1459845011331-34241defc9b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b59102ecb06e7e5eb3c33c8001f1ea8');
-	background-size: cover;
-	height: 800px;
+html, .indexPage{
+	/*background: linear-gradient: (rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));*/
+	background: url('https://images.unsplash.com/photo-1459845011331-34241defc9b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b59102ecb06e7e5eb3c33c8001f1ea8') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	/*height: auto;*/
 }
 .whatDa{
 	font-family: 'Gradies';
 	font-size: 100px;
 	color: white;
 	text-align: center;
-	text-shadow: 1px 2px #191953;
+	text-shadow: 2px 2px #191953;
 	margin: 60px;
 	padding: 10px;
 }
+.whatDa2{
+	font-family: "Gradies";
+	font-size: 100px;
+	color: #191953;
+	text-align: center;
+	text-shadow: 1px 2px #ffff94;
+	margin: 10px;
+	margin-top: 50px;
+	padding: 10px;
+	border-bottom: 5px dotted #191953;
+	border-top: 5px dotted #191953;
+}
 .createRecipeForm{
-	text-align: 
-	center;
+	text-align: center;
 }
 .adding{
 	height: 43px;
 	width: 250px;
+	margin-bottom: 30px;
 }
 .plusSubmit{
 	margin: 0;
-	padding: 9px 22px;
-	padding-bottom: 12px;
+	padding: 9px 20px;
+	padding-bottom: 10px;
 	color: white;
 	background-color: #babacb;
 }
-ul{
-	margin-top: 80px;
+.specificRecipe{
+	margin-top: 10px;
 	list-style: none;
 }
-.aList{
+.ingredientList{
 	list-style: none;
 	text-align: center;
 	font-family: 'Avenir';
@@ -126,44 +160,101 @@ ul{
 	color: white;
 	background-color: #babacb;
 	margin: 0px auto;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 8px;
 }
 .srch-btn{
 	background-color: transparent;
 	color: white;
 	border: none;
-	font-family: 'Avenir';
-	font-size: 25px;
+	font-family: "Avenir";
+	font-size: 22px;
 	margin-top: 0;
 	float: left;
 }
+.srch-btn:hover{
+	color: #ffff94;
+	font-size: 25px;
+}
 .searchResults{
 	text-align: center;
-	background-color: white;
+	/*background-color: white;*/
 	background-size: cover;
+	padding-top: 50px;
 }
 h3{
 	font-family: 'Avenir';
 	font-size: 2rem;
-	color: #191953;
+	color: white;
 }
 .add-btn{
 	padding: 5px 15px;
 	color: white;
 	background-color: #babacb;
 }
-img{
+.listImage, img {
 	height: 200px;
 	width: 200px;
 	border-radius: 10px;
+	text-align: center;
+	border: solid 2px white;
+}
+
+img:hover {
+  opacity: 0.6;
 }
 .showResults{
-	background-color: white;
+	background-color: #191953;
 	background-size: cover;
 }
-.modal-body{
+
+.listOutIngredients{
 	font-family: 'Avenir';
 	font-size: 15px;
 	color: #191953;
+}
+.modal-dialog{
+	font-family: 'Avenir';
+	font-size: 15px;
+	color: white;
+}
+.recipeContainer{
+	background-color: transparent;
+}
+.userProf{
+	float: right;
+	display: inline-block;
+}	
+h2{
+	font-family: 'Gradies';
+	font-size: 100px;
+	color: #191953;
+	text-align: center;
+	text-shadow: 1px 2px #ffff94;
+	margin: 10px;
+}
+h5{
+	color: #191953;
+	text-align: center;
+	font-family: 'Avenir';
+	font-size: 20px;
+	border-top: 2px dotted #191953;
+	border-bottom: 2px dotted #191953;
+}
+.specificRecipe{
+	font-family: 'Avenir';
+	color: #191953;
+	font-size: 15px;
+}
+.saved-user-history{
+	background-color: white;
+}
+.historyList{
+	text-align: center;
+	font-family: 'Avenir';
+}
+li{
 	list-style: none;
 }
 
@@ -195,3 +286,9 @@ img{
 	font-family: 'Avenir';
 	padding: 0px;
 }
+/*footer{
+	background-color: #191953;
+	width: 1500px; 
+	height: 400px;
+}
+*/
