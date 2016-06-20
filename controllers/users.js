@@ -44,6 +44,7 @@ router.use(passport.authenticate('jwt', { session: false }));
 //INDEX. Gets the saved cooking recipes
 
 router.get('/recipes', function(req, res, next) {
+  console.log('user id: ' + req.user.id);
   User.findById(req.user.id).then(function(user) {
     console.log(user);
     res.send(user);

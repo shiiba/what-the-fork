@@ -256,7 +256,9 @@ var Index = React.createClass({
     this.setState({
       firstName: data.firstName,
       recipeHistory: data.recipeHistory,
-      showProfile: true
+      showProfile: true,
+      showResults: false,
+      ingredients: []
     });
   },
   handleReset: function(){
@@ -289,7 +291,7 @@ var Index = React.createClass({
           </div>
         </nav>
         <br/>
-        <div className={this.state.showResults ? "hidden" : "" }>
+        <div className={this.state.showResults == true || this.state.showProfile == true ? "hidden" : "" }>
           <ul>
             <CreateRecipeForm onListSubmit={this.recipes} /> 
             {showIngredients}
