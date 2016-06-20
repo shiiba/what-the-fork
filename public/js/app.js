@@ -1,8 +1,3 @@
-// $(document).ready(function() {
-
- 
-// });
-
 //This will check the users cookies and see if they are already set (aka, already looged in)
 var AppDisplay = React.createClass({
 	getInitialState: function(){
@@ -38,6 +33,9 @@ var AppDisplay = React.createClass({
           <nav>
           Q
           </nav>
+          <p className="whatDa2">
+            WhatDa Fork Should I Eat?
+          </p>
           <div className="signup"> 
             <SignupForm 
               initialCreate={this.state.authenticatedUser} 
@@ -293,46 +291,48 @@ var Index = React.createClass({
     var showIngredients = this.state.ingredients.map(function(addIngredients){
       return(
         <div className="ingredientList">
-            <li>{addIngredients.ingredient}</li>
+            <li>• {addIngredients.ingredient}</li>
         </div>
       );
     });
     return(
-      <div className="indexPage">
-        <nav> Q
-          <button className="new-btn" onClick={this.handleReset}>
-          New Search
-          </button>
-          <div className={this.state.showProfile ? "hidden" : ""}>
-            <UserProfileLink 
-              handleHistory={this.handleHistory}
+      <div>
+        <div className="indexPage">
+          <nav> Q
+            <button className="new-btn" onClick={this.handleReset}>
+            New Search
+            </button>
+            <div className={this.state.showProfile ? "hidden" : "userProf"}>
+              <UserProfileLink 
+                handleHistory={this.handleHistory}
+              />
+            </div>
+          </nav>
+          <br/>
+          <div className={this.state.showResults == true || this.state.showProfile == true ? "hidden" : "" }>
+            <ul>
+              <CreateRecipeForm onListSubmit={this.recipes} /> 
+              {showIngredients}
+            </ul>
+          </div>
+          <div>
+            {this.state.ingredients.length > 0 ? 
+              <SearchRecipesBtn 
+                ingredients={this.state.ingredients} 
+                showResults={this.state.showResults} 
+                switchShowResults={this.switchShowResults} 
+              /> : 
+              null
+            }
+          </div>
+          <div className={this.state.showProfile ? "" : "hidden"}>
+            <UserProfile 
+              firstName={this.state.firstName}
+              recipeHistory={this.state.recipeHistory}
             />
           </div>
-        </nav>
-        <br/>
-        <div className={this.state.showResults == true || this.state.showProfile == true ? "hidden" : "" }>
-          <ul>
-            <CreateRecipeForm onListSubmit={this.recipes} /> 
-            {showIngredients}
-          </ul>
         </div>
-        <div>
-          {this.state.ingredients.length > 0 ? 
-            <SearchRecipesBtn 
-              ingredients={this.state.ingredients} 
-              showResults={this.state.showResults} 
-              switchShowResults={this.switchShowResults} 
-            /> : 
-            null
-          }
-        </div>
-        <div className={this.state.showProfile ? "" : "hidden"}>
-          <UserProfile 
-            firstName={this.state.firstName}
-            recipeHistory={this.state.recipeHistory}
-          />
-        </div>
-      </div>
+      </div>  
     );
   }
 });
@@ -474,7 +474,7 @@ var RecipeList = React.createClass({
       };
       var ingredients = recipe.ingredients.map(function(ingredient){
         return(
-          <li>{ingredient}</li>
+          <li> {ingredient}</li>
         );
       });
       return(
@@ -495,12 +495,13 @@ var RecipeList = React.createClass({
               <div className="modal-content">
                 <div className="modal-header">
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h2 className="modal-title" id="myModalLabel">{recipe.label}</h2>
+                  <h5 className="modal-title" id="myModalLabel">{recipe.label}</h5>
                 </div>
                 <div className="modal-body">
                   <img src={recipe.image}/><br/>
                   <a href={recipe.uri} target="_blank">View Recipe</a><br/>
-                  <ul>{ingredients}</ul>
+                  <p className="listOutIngredients">Ingredients</p>
+                  <p className="specificRecipe">{ingredients}</p>
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -555,22 +556,21 @@ var UserProfile = React.createClass({
     var recipes = this.props.recipeHistory.map(function(recipe){
       var ingredients = recipe.ingredients.map(function(ingredient){
         return(
-          <li className="aList">{ingredient}</li>
+          <li> {ingredient}</li>
         );
       });
       return(
-        <div>
-          <h4>{recipe.label}</h4><br/>
+        <div className="historyList">
+          <h5>{recipe.label}</h5><br/>
           <img src={recipe.image}/><br/>
           <a href={recipe.uri}>View Recipe</a><br/>
           <ul>{ingredients}</ul>
-          <hr/>
         </div>
       );
     });
     return(
 			<div className="saved-user-history">
-        <h2>{this.props.firstName}</h2>
+        <h2>{this.props.firstName}'s Saved Recipes</h2>
         {recipes}
 			</div>
 		);
