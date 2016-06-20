@@ -10,11 +10,16 @@
 	font-family: "PeaxWebdesignFreeIcons";
 	src: url(../fonts/PeaxWebdesignFreeIcons.ttf);
 }
+@font-face{
+	font-family: 'name';
+	src: url('../fonts/DK-Lemon-Yellow-Sun.otf');
+}
 
 body{
 	margin: 0;
 	padding: 0;
 }
+
 .hidden{
   display: none;
 }
@@ -33,11 +38,11 @@ body{
 	border-right: 2px solid #191953;
 }
 .login-form{
-	font-family: Avenir;
+	font-family: 'Avenir';
 	margin-left: 100px;
 }
 .signup-form{
-	font-family: Avenir;
+	font-family: 'Avenir';
 	margin-left: 100px;
 }
 .loginSubmit, .signupSubmit{
@@ -53,7 +58,7 @@ body{
 	width: 300px;
 }
 nav{
-	font-family: PeaxWebdesignFreeIcons;
+	font-family: 'PeaxWebdesignFreeIcons';
 	font-size: 70px;
 	color: white;
 	height: 80px;
@@ -70,9 +75,10 @@ nav{
 	color: white;
 	border: none;
 	float: right;
-	font-family: Avenir;
+	font-family: 'Avenir';
 	font-size: 25px;
 }
+
 .indexPage{
 	background: linear-gradient: (rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
 	background: url('https://images.unsplash.com/photo-1459845011331-34241defc9b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b59102ecb06e7e5eb3c33c8001f1ea8');
@@ -80,7 +86,7 @@ nav{
 	height: 800px;
 }
 .whatDa{
-	font-family: Gradies;
+	font-family: 'Gradies';
 	font-size: 100px;
 	color: white;
 	text-align: center;
@@ -110,7 +116,7 @@ ul{
 .aList{
 	list-style: none;
 	text-align: center;
-	font-family: Avenir;
+	font-family: 'Avenir';
 	font-size: 3rem;
 	color: white;
 	text-shadow: 2px 1px black;
@@ -125,7 +131,7 @@ ul{
 	background-color: transparent;
 	color: white;
 	border: none;
-	font-family: Avenir;
+	font-family: 'Avenir';
 	font-size: 25px;
 	margin-top: 0;
 	float: left;
@@ -136,7 +142,7 @@ ul{
 	background-size: cover;
 }
 h3{
-	font-family: Avenir;
+	font-family: 'Avenir';
 	font-size: 2rem;
 	color: #191953;
 }
@@ -155,10 +161,37 @@ img{
 	background-size: cover;
 }
 .modal-body{
-	font-family: Avenir;
+	font-family: 'Avenir';
 	font-size: 15px;
 	color: #191953;
 	list-style: none;
 }
 
-
+.saved-user-history img {
+	border: 3px solid black;
+}
+.saved-user-history div{
+	text-align: center;
+	padding: 20px;
+}
+.saved-user-history a {
+	padding: 5em;
+	font-family: 'Avenir';
+	font-size: 18px; 
+}
+.saved-user-history h4{
+	font-family: 'Avenir';
+	font-size: 20px;
+}
+.saved-user-history h2 {
+	font-family: 'name';
+	font-size: 50px;
+	text-align: center;
+	margin: 0px;
+	padding: 20px;
+}
+.saved-user-history ul li {
+	list-style-type: none;
+	font-family: 'Avenir';
+	padding: 0px;
+}

@@ -15,15 +15,46 @@ function deepPrint(x){
 // ------------------------------
 
 // CREATE A NEW USER
-router.post('/', function(req, res) {
-	User.create(req.body, function(err, user) {
-		if(err) {
-			console.log(err); 
-			res.status(500).end();
+
+router.post('/register', function(req, res){
+	var user = new User({username: req.body.username, password: req.body.password});
+	user.save(function(err){
+		if(err){
+			console.log(err);
+		} else {
+			console.log(username + "saved");
+			req.login(user, function(err){
+				if (err){
+					console.log(err);
+				}
+				return res.redirect('/users');
+			});
 		}
-		res.send(user);
 	});
 });
+
+////The way of doing it now
+// router.post('/', function(req, res) {
+// 	User.create(req.body, function(err, user) {
+// 		if(err) {
+// 			console.log(err); 
+// 			res.status(500).end();
+// 		}
+// 		res.send(user);
+// 	});
+// });
+
+// router.post('/register', function(req, res) {
+//     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+//         if (err) {
+//             return res.render('register', { account : account });
+//         }
+
+//         passport.authenticate('local')(req, res, function () {
+//             res.redirect('/');
+//         });
+//     });
+// });
 
 router.post('/search', function(req,res){   // add in user ID?
 	var ingredientQuery = req.body.ingredients;
