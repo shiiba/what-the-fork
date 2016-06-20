@@ -1,20 +1,153 @@
+body{
+	margin: 0;
+	padding: 0;
+}
 .hidden{
   display: none;
 }
 .recipeList{
-	margin: 0 auto;
+	background-color: white;
+}
+.login{
+	float: left;
+	width: 480px;
+	margin-top: 30px;
+}
+.signup{
+	float: left;
+	width: 482px;
+	margin-top: 30px;
+	border-right: 2px solid #191953;
+}
+.login-form{
+	font-family: Avenir;
+	margin-left: 100px;
+}
+.signup-form{
+	font-family: Avenir;
+	margin-left: 100px;
+}
+.loginSubmit, .signupSubmit{
+	margin-right: 10px;
+	margin: 10px;
+	padding: 5px 15px;
+	color: white;
+	background-color: #babacb;
+	margin-left: 185px;
+}
+.first-name-create, .last-name-create, .username-create, .password-create, .username-login-form, .password-login-form{
+	height: 35px;
+	width: 300px;
+}
+nav{
+	font-family: PeaxWebdesignFreeIcons;
+	font-size: 70px;
+	color: white;
+	height: 80px;
+	width: 100%;
+	padding-left: 5px;
+	background-color: #191953;
 	display: inline-block;
 }
-
-nav{
-	height: 50px;
-	width: 100%;
-	background-color: #191953;
+.userDiv{
+	float: right;
 }
-
-.srch-btn{
+.new-btn{
 	background-color: #191953;
 	color: white;
 	border: none;
 	float: right;
+	font-family: Avenir;
+	font-size: 25px;
 }
+.indexPage{
+	background: linear-gradient: (rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+	background: url('https://images.unsplash.com/photo-1459845011331-34241defc9b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b59102ecb06e7e5eb3c33c8001f1ea8');
+	background-size: cover;
+	height: 800px;
+}
+.whatDa{
+	font-family: Gradies;
+	font-size: 100px;
+	color: white;
+	text-align: center;
+	text-shadow: 1px 2px #191953;
+	margin: 60px;
+	padding: 10px;
+}
+.createRecipeForm{
+	text-align: 
+	center;
+}
+.adding{
+	height: 43px;
+	width: 250px;
+}
+.plusSubmit{
+	margin: 0;
+	padding: 9px 22px;
+	padding-bottom: 12px;
+	color: white;
+	background-color: #babacb;
+}
+ul{
+	margin-top: 80px;
+	list-style: none;
+}
+.aList{
+	list-style: none;
+	text-align: center;
+	font-family: Avenir;
+	font-size: 3rem;
+	color: white;
+	text-shadow: 2px 1px black;
+}
+.searchButton{
+	padding: 5px 15px;
+	color: white;
+	background-color: #babacb;
+	margin: 0px auto;
+}
+.srch-btn{
+	background-color: transparent;
+	color: white;
+	border: none;
+	font-family: Avenir;
+	font-size: 25px;
+	margin-top: 0;
+	float: left;
+}
+.searchResults{
+	text-align: center;
+	background-color: white;
+	background-size: cover;
+}
+h3{
+	font-family: Avenir;
+	font-size: 2rem;
+	color: #191953;
+}
+.add-btn{
+	padding: 5px 15px;
+	color: white;
+	background-color: #babacb;
+}
+img{
+	height: 200px;
+	width: 200px;
+	border-radius: 10px;
+}
+.showResults{
+	background-color: white;
+	background-size: cover;
+}
+.modal-body{
+	font-family: Avenir;
+	font-size: 15px;
+	color: #191953;
+	list-style: none;
+}
+{
+
+}
+
