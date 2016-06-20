@@ -373,6 +373,7 @@ var SearchRecipesBtn = React.createClass({
     var results2 = [];
     recipeData.forEach(function(recipe){
       var recipeItem = {
+        key: recipe.recipe.label,
         label: recipe.recipe.label,
         image: recipe.recipe.image,
         uri: recipe.recipe.url,
@@ -445,49 +446,59 @@ var RecipeList = React.createClass({
   render: function(){
     // console.log(this.props.results);
     var self = this;
-    var list = this.props.results.map(function(data){
+    var max = 0;
+    var recipes = this.props.results.map(function(recipe){
+      max += 1;
+      var id = "a" + max;
+      var target = "#" + id;
+      console.log('target: ' + target);
       var callback = function(){
-        self.addRecipe(data);
+        self.addRecipe(recipe);
       };
+      var ingredients = recipe.ingredients.map(function(ingredient){
+        return(
+          <li>{ingredient}</li>
+        );
+      });
       return(
         <div>
-          <hr/>
-          <h3>{data.label}</h3>
-          <img src={data.image}/>
-          <button
-            onClick={callback}
-            className="add-btn"
+          <div 
+            className="recipeList"
+            data-toggle="modal"
+            data-target={target}
           >
-            I'll Forking Cook This
-          </button>
+          <div>
+            <h3>{recipe.label}</h3>
+            <img src={recipe.image}/>
+            <hr/>
+        </div>
+          </div>
+          <div className="modal fade" id={id} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 className="modal-title" id="myModalLabel">{recipe.label}</h4>
+                </div>
+                <div className="modal-body">
+                  <img src={recipe.image}/><br/>
+                  <a href={recipe.uri}>View Recipe</a><br/>
+                  <ul>{ingredients}</ul>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" onClick={callback} className="btn btn-primary add-btn" data-dismiss="modal">I'll Forking Cook This</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
     return(
       <div className="recipe-container">
-        <div 
-          className="recipeList"
-          data-toggle="modal"
-          data-target="#myModal"
-        >
-        {list}
-        </div>
-        <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title" id="myModalLabel">Modal title</h4>
-              </div>
-              <div className="modal-body">
-                ...
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
+        <div>
+          {recipes}
         </div>
       </div>
     );
