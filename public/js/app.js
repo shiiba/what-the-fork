@@ -455,11 +455,11 @@ var RecipeList = React.createClass({
             data-toggle="modal"
             data-target={target}
           >
-          <div>
-            <h3>{recipe.label}</h3>
-            <img src={recipe.image}/>
-            <hr/>
-        </div>
+            <div>
+              <h3>{recipe.label}</h3>
+              <img src={recipe.image}/>
+              <hr/>
+            </div>
           </div>
           <div className="modal fade" id={id} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div className="modal-dialog" role="document">
