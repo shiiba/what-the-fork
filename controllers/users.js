@@ -45,7 +45,8 @@ router.use(passport.authenticate('jwt', { session: false }));
 
 router.get('/:id/recipes', function(req, res, next) {
 	User.findById(req.params.id).then(function(user) {
-		res.send(user.recipeHistory)
+    console.log(user);
+    res.send(user);
 	});
 });
 

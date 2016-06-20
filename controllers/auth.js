@@ -22,8 +22,15 @@ router.post('/', passport.authenticate('local', { session: false }), function(re
 	var token = jwt.sign(req.user, process.env.JWT_SECRET, {
 		expiresIn: 1400
 	});
+
+	var userId = req.user._id;
+	console.log('userId: ' + userId);
+
 	console.log(token);
-	res.json({ token: token });
+	res.json({ 
+		token: token, 
+		userId: userId
+	});
 });
 
 module.exports = router;
