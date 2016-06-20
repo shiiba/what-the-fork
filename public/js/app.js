@@ -470,7 +470,7 @@ var RecipeList = React.createClass({
                 </div>
                 <div className="modal-body">
                   <img src={recipe.image}/><br/>
-                  <a href={recipe.uri}>View Recipe</a><br/>
+                  <a href={recipe.uri} target="_blank">View Recipe</a><br/>
                   <ul>{ingredients}</ul>
                 </div>
                 <div className="modal-footer">
