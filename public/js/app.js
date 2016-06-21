@@ -17,6 +17,11 @@ var AppDisplay = React.createClass({
 			authenticatedUser: true
 		})
 	},
+  handleReset: function(){
+    this.setState({
+      authenticatedUser: ''
+    });
+  },
 	render: function(){
 		console.log('authenticatedUser: ', this.state.authenticatedUser);
 		console.log('==================================');
@@ -25,7 +30,7 @@ var AppDisplay = React.createClass({
 		if(this.state.authenticatedUser === true) {
 			return (
 				<div>
-					<Index />
+					<Index logout={this.handleReset}/>
 				</div>
 				) 
 		} else {
@@ -297,6 +302,10 @@ var Index = React.createClass({
       recipeHistory: []
     })
   },
+  handleLogout: function(){
+    Cookies.remove('jwt_token');
+    this.props.logout();
+  },
   render: function(){
     var showIngredients = this.state.ingredients.map(function(addIngredients){
       return(
@@ -309,14 +318,17 @@ var Index = React.createClass({
       <div>
         <div className="indexPage">
           <nav> Q
-            <button className="new-btn" onClick={this.handleReset}>
-            New Search
+            <button className="logOut" onClick={this.handleLogout}>
+              Logout
             </button>
             <div className={this.state.showProfile ? "hidden" : "userProf"}>
               <UserProfileLink 
                 handleHistory={this.handleHistory}
               />
             </div>
+            <button className="new-btn" onClick={this.handleReset}>
+            New Search
+            </button>
           </nav>
           <br/>
           <div className={this.state.showResults == true || this.state.showProfile == true ? "hidden" : "" }>

@@ -232,7 +232,21 @@ img:hover {
 .userProf{
 	float: right;
 	display: inline-block;
-}	
+}
+.logOut{
+	background-color: #191953;
+	color: white;
+	border: none;
+	float: right;
+	font-family: 'Avenir';
+	font-size: 22px;
+	}
+
+.logOut:hover{
+		color: #ffff94;
+		font-size: 25px;
+	}
+
 h2{
 	font-family: 'Gradies';
 	font-size: 100px;
