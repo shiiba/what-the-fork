@@ -12,7 +12,8 @@ var AppDisplay = React.createClass({
 		};
 	},
 	changeLogin: function() {
-		this.setState ({
+		console.log('changelogin');
+    this.setState ({
 			authenticatedUser: true
 		})
 	},
@@ -94,7 +95,7 @@ var LoginForm = React.createClass({
 				console.log('Cookie Monster');
 				Cookies.set('jwt_token', data.token);
 				console.log(data);
-				this.props.onChange(data.token)
+				this.props.onChange(data.token);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
@@ -167,7 +168,7 @@ var SignupForm = React.createClass({
 	signupAJAX: function(firstName, lastName, username, password){
 		console.log('sending post request');
 		$.ajax({
-			url:'/users',
+			url:'/users/register',
 			method: 'POST',
 			data: {
 				firstName: firstName,
@@ -178,6 +179,7 @@ var SignupForm = React.createClass({
 			success: function(data){
 				console.log("A new user signing up!!");
 				Cookies.set('jwt_token', data.token);
+        this.props.onChange(data.token);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());

@@ -17,21 +17,44 @@ function deepPrint(x){
 // CREATE A NEW USER
 
 router.post('/register', function(req, res){
-	var user = new User({username: req.body.username, password: req.body.password});
-	user.save(function(err){
-		if(err){
-			console.log(err);
-		} else {
-			console.log(username + "saved");
-			req.login(user, function(err){
-				if (err){
-					console.log(err);
-				}
-				return res.redirect('/users');
-			});
-		}
-	});
+	console.log('req.body: ' + req.body);
+  User.create(req.body, function(err, user){
+    if(err){
+      console.log(err);
+      res.status(500).end();
+    // } else {
+    //   passport.authenticate('local', { session: false }), function(req, res, next){
+    //     var token = jwt.sign(req.user, process.env.JWT_SECRET, {
+    //     expiresIn: 1400
+    //     });
+    //     var userId = req.user._id;
+    //     console.log('userId: ' + userId);
+    //     console.log(token);
+    //     res.json({ 
+    //       token: token, 
+    //       userId: userId
+    //     });
+    //     res.redirect('/users');
+      }
+    res.send(true);
+  });
 });
+
+ //  var user = new User({username: req.body.username, password: req.body.password});
+	// user.save(function(err){
+	// 	if(err){
+	// 		console.log(err);
+	// 	} else {
+	// 		console.log('user: ' + user);
+	// 		req.login(user, function(err){
+	// 			if (err){
+	// 				console.log(err);
+	// 			}
+	// 			return res.redirect('/users');
+	// 		});
+	// 	}
+	// });
+
 
 ////The way of doing it now
 // router.post('/', function(req, res) {
@@ -75,7 +98,7 @@ router.use(passport.authenticate('jwt', { session: false }));
 //INDEX. Gets the saved cooking recipes
 
 router.get('/recipes', function(req, res, next) {
-  console.log('user id: ' + req.user.id);
+  console.log('user id: ' + req.user._id);
   User.findById(req.user.id).then(function(user) {
     console.log(user);
     res.send(user);
@@ -83,7 +106,7 @@ router.get('/recipes', function(req, res, next) {
 });
 
 router.put('/recipes', function(req, res){
-	User.findById(req.user.id).then(function(user){
+	User.findById(req.user._id).then(function(user){
 		var recipe = new Recipe(req.body);
 		user.recipeHistory.push(recipe);
 		user.save(function(err){
