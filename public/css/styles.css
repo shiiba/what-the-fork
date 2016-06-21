@@ -74,9 +74,9 @@ body{
 }
 nav{
 	font-family: 'PeaxWebdesignFreeIcons';
-	font-size: 80px;
+	font-size: 50px;
 	color: white;
-	height: 100px;
+	height: 55px;
 	width: 100%;
 	padding-left: 5px;
 	background-color: #191953;
@@ -98,13 +98,20 @@ nav{
 	font-size: 25px;
 }
 
-html, .indexPage{
+#container{
+	/*height: 1000px;*/
+}
+
+.indexPage:not(.secondContainer){
 	/*background: linear-gradient: (rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));*/
 	background: url('https://images.unsplash.com/photo-1459845011331-34241defc9b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b59102ecb06e7e5eb3c33c8001f1ea8') no-repeat center center fixed;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: 100% auto;
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
 	/*height: auto;*/
 }
 .whatDa{
@@ -286,9 +293,300 @@ li{
 	font-family: 'Avenir';
 	padding: 0px;
 }
-/*footer{
-	background-color: #191953;
-	width: 1500px; 
-	height: 400px;
+
+@media (max-width: 1400px){
+	@font-face{
+		font-family: "Avenir";
+		src: url(../fonts/avenir.ttc);
+	}
+	@font-face{
+		font-family: "Gradies";
+		src: url(../fonts/Gradies.ttf);
+	}
+	@font-face{
+		font-family: "PeaxWebdesignFreeIcons";
+		src: url(../fonts/PeaxWebdesignFreeIcons.ttf);
+	}
+	@font-face{
+		font-family: 'name';
+		src: url('../fonts/DK-Lemon-Yellow-Sun.otf');
+	}
+
+	html{
+		margin: 0px;
+		padding: 0px;
+		overflow: scroll;
+	}
+	body{
+		margin: 0px;
+		padding: 0px;
+		background-color: white;
+	}
+
+	.hidden{
+	  display: none;
+	}
+	.recipeList{
+		background-color: transparent;
+	}
+	.second-container{
+		background-color: white;
+		height: ;
+	}
+	.login{
+		float: left;
+		width: 480px;
+		margin-top: 30px;
+		background-color: white;
+	}
+	.forms{
+		display: inline-block;
+		background-color: white;
+	}
+	.signup{
+		float: left;
+		width: 482px;
+		margin-top: 30px;
+		background-color: white;
+	}
+	.login-form{
+		font-family: 'Avenir';
+		margin-left: 100px;
+	}
+	.signup-form{
+		font-family: 'Avenir';
+		margin-left: 100px;
+	}
+	.loginSubmit, .signupSubmit{
+		margin-right: 10px;
+		margin: 10px;
+		padding: 5px 15px;
+		color: white;
+		background-color: #babacb;
+		margin-left: 185px;
+	}
+	.first-name-create, .last-name-create, .username-create, .password-create, .username-login-form, .password-login-form{
+		height: 35px;
+		width: 300px;
+	}
+	nav{
+		font-family: 'PeaxWebdesignFreeIcons';
+		font-size: 50px;
+		color: white;
+		height: 55px;
+		width: 100%;
+		padding-left: 5px;
+		background-color: #191953;
+		display: inline-block;
+	}
+	.userDiv{
+		float: right;
+	}
+	.new-btn{
+		background-color: #191953;
+		color: white;
+		border: none;
+		float: right;
+		font-family: 'Avenir';
+		font-size: 22px;
+	}
+	.new-btn:hover{
+		color: #ffff94;
+		font-size: 25px;
+	}
+
+	#container{
+		/*height: 1000px;*/
+	}
+	.whatDa{
+		font-family: 'Gradies';
+		font-size: 100px;
+		color: #191953;
+		text-align: center;
+		text-shadow: 2px 2px #ffff94;
+		margin: 60px;
+		padding: 10px;
+		border-bottom: 5px dotted #191953;
+		border-top: 5px dotted #191953;
+	}
+	.whatDa2{
+		font-family: "Gradies";
+		font-size: 100px;
+		color: #191953;
+		text-align: center;
+		text-shadow: 1px 2px #ffff94;
+		margin: 10px;
+		margin-top: 50px;
+		padding: 10px;
+		border-bottom: 5px dotted #191953;
+		border-top: 5px dotted #191953;
+	}
+	.createRecipeForm{
+		text-align: center;
+	}
+	.adding{
+		height: 43px;
+		width: 250px;
+		margin-bottom: 30px;
+	}
+	.plusSubmit{
+		margin: 0;
+		padding: 9px 20px;
+		padding-bottom: 10px;
+		color: white;
+		background-color: #babacb;
+	}
+	.specificRecipe{
+		margin-top: 10px;
+		list-style: none;
+	}
+	.ingredientList{
+		list-style: none;
+		text-align: center;
+		font-family: 'Avenir';
+		font-size: 3rem;
+		color: #191953;
+		text-shadow: 2px 1px #ffff94;
+	}
+	.searchButton{
+		padding: 5px 15px;
+		color: white;
+		background-color: #babacb;
+		margin: 0px auto;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		border-radius: 8px;
+	}
+	.srch-btn{
+		background-color: transparent;
+		color: white;
+		border: none;
+		font-family: "Avenir";
+		font-size: 22px;
+		margin-top: 0;
+		float: left;
+	}
+	.srch-btn:hover{
+		color: #ffff94;
+		font-size: 25px;
+	}
+	.searchResults{
+		text-align: center;
+		/*background-color: white;*/
+		background-size: cover;
+		padding-top: 50px;
+	}
+	h3{
+		font-family: 'Avenir';
+		font-size: 2rem;
+		color: #191953;
+	}
+	.add-btn{
+		padding: 5px 15px;
+		color: white;
+		background-color: #babacb;
+	}
+	.listImage, img {
+		height: 200px;
+		width: 200px;
+		border-radius: 10px;
+		text-align: center;
+		border: solid 2px white;
+	}
+
+	img:hover {
+	  opacity: 0.6;
+	}
+	.showResults{
+		background-color: #191953;
+		background-size: cover;
+	}
+
+	.listOutIngredients{
+		font-family: 'Avenir';
+		font-size: 15px;
+		color: #191953;
+	}
+	.modal-dialog{
+		font-family: 'Avenir';
+		font-size: 15px;
+		color: white;
+	}
+	.recipeContainer{
+		background-color: transparent;
+	}
+	.userProf{
+		float: right;
+		display: inline-block;
+	}	
+	h2{
+		font-family: 'Gradies';
+		font-size: 100px;
+		color: #191953;
+		text-align: center;
+		text-shadow: 1px 2px #ffff94;
+		margin: 10px;
+	}
+	h5{
+		color: #191953;
+		text-align: center;
+		font-family: 'Avenir';
+		font-size: 20px;
+		border-top: 2px dotted #191953;
+		border-bottom: 2px dotted #191953;
+	}
+	.specificRecipe{
+		font-family: 'Avenir';
+		color: #191953;
+		font-size: 15px;
+	}
+	.saved-user-history{
+		background-color: white;
+	}
+	.historyList{
+		text-align: center;
+		font-family: 'Avenir';
+	}
+	li{
+		list-style: none;
+	}
+
+	.saved-user-history img {
+		border: 3px solid black;
+	}
+	.saved-user-history div{
+		text-align: center;
+		padding: 20px;
+	}
+	.saved-user-history a {
+		padding: 5em;
+		font-family: 'Avenir';
+		font-size: 18px; 
+	}
+	.saved-user-history h4{
+		font-family: 'Avenir';
+		font-size: 20px;
+	}
+	.saved-user-history h2 {
+		font-family: 'name';
+		font-size: 50px;
+		text-align: center;
+		margin: 0px;
+		padding: 20px;
+	}
+	.saved-user-history ul li {
+		list-style-type: none;
+		font-family: 'Avenir';
+		padding: 0px;
+	}
+	.indexPage:not(.secondContainer){
+		background: url('http://kingofwallpapers.com/white/white-002.jpg');
+		-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: 100% auto;
+	  position: absolute;
+	  min-height: 100%;
+	  width: 100%;
+	}
 }
-*/

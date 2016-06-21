@@ -178,8 +178,14 @@ var SignupForm = React.createClass({
 			},
 			success: function(data){
 				console.log("A new user signing up!!");
-				Cookies.set('jwt_token', data.token);
-        this.props.onChange(data.token);
+				this.setState({
+          firstName: this.props.initialCreate,
+          lastName: this.props.initialCreate, 
+          username: this.props.initialCreate,
+          password: this.props.initialCreate
+        });
+        // Cookies.set('jwt_token', data.token);
+        // this.props.onChange(data.token);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(status, err.toString());
