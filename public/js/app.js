@@ -111,7 +111,7 @@ var LoginForm = React.createClass({
 		return(
       <div className="login">
   			<div className="login-form" >
-  				<h3>Please Login</h3>
+  				<h1>Please Login</h1>
   				<form onSubmit={this.handleSubmit}>
   					<label 
               htmlFor="username"
@@ -201,7 +201,7 @@ var SignupForm = React.createClass({
 		return(
       <div className="signup">
   			<div className="signup-form">
-    			<h3> Create An Account </h3>
+    			<h1> Create An Account </h1>
     			<form 
             onSubmit={this.handleSubmit}
           >

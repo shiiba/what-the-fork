@@ -565,6 +565,10 @@ li{
 		list-style: none;
 	}
 
+	h1{
+		color: #191953;
+	}
+
 	.saved-user-history img {
 		border: 3px solid black;
 	}
