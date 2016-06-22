@@ -133,7 +133,7 @@ var LoginForm = React.createClass({
             <br/>
   					<input 
               className="password-login-form" 
-              type="text" 
+              type="password" 
               value={this.state.password} 
               onChange={this.handleLoginFormChange.bind(this, 'password')}
             /><br/>
@@ -249,7 +249,7 @@ var SignupForm = React.createClass({
           <br/>
     			<input 
             className="password-create" 
-            type="text" 
+            type="password" 
             value={this.state.password} 
             onChange={this.handleSignupFormChange.bind(this,'password')}
           /><br/>
