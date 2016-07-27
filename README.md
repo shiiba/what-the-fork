@@ -11,9 +11,12 @@ Kevin Shiiba, Anna Penchansky and Ada Xu
     - Node dependencies
     - MongoDB
     - AJAX
-    - React
+    - React.js
     - Bootstrap
 
+###Demo:
+<iframe src="https://player.vimeo.com/video/173649473" width="320" height="219" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
 
 ##Features:
 - Signup and login forms
