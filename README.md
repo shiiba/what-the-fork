@@ -1,8 +1,10 @@
 #What-Da-Fork-App
 A single page application with user authentification that searches for recipes based on what is in user's 'fridge' and saves the desired recipes to user's profile.
 
+###[Demo](https://player.vimeo.com/video/173649473)
+
 ##Team Members
-Kevin Shiiba, Anna Penchansky and Ada Xu
+Kevin Shiiba, Ada Xu, and Anna Penchansky
 
 ##Using:
     - Edamam API
@@ -13,8 +15,6 @@ Kevin Shiiba, Anna Penchansky and Ada Xu
     - AJAX
     - React.js
     - Bootstrap
-
-###[Demo](https://player.vimeo.com/video/173649473)
 
 ##Features:
 - Signup and login forms
